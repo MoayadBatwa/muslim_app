@@ -1,14 +1,20 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muslim_data_flutter/muslim_data_flutter.dart' as muslim_pack;
 
 part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
+  final muslimRepo = muslim_pack.MuslimRepository();
+
   CategoryBloc() : super(CategoryInitial()) {
-    on<CategoryEvent>((event, emit) {
-      // TODO: implement event handler
+    on<GetCategoriesEvent>((event, emit) async {
+      final categories = await muslimRepo.getAzkarCategories();
+      log("Categories: ${categories.runtimeType}");
     });
   }
 }
