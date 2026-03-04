@@ -14,18 +14,14 @@ class CategoryScreen extends StatelessWidget {
               itemCount: 10,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1,
+                childAspectRatio: 1/ 0.8,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
               itemBuilder: (context, index){
-                return SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Card(
-                    color: Colors.amber,
-                    child: Center(child: Text("Category $index")),
-                  ),
+                return Card(
+                  color: Colors.amber,
+                  child: Center(child: Text("Category $index")),
                 );
               },
             ),
