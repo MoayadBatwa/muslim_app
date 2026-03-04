@@ -21,20 +21,25 @@ class CategoryScreen extends StatelessWidget {
             ),
 
             body: Column(
+              mainAxisAlignment: .center,
               children: [
                 BlocBuilder<CategoryBloc, CategoryState>(
-                  // buildWhen: (previous, current) {
-                  //   if (current is CategoryInitial) {
-                  //     return true;
-                  //   }
+                  buildWhen: (previous, current) {
+                    if (current is CategoryInitial) {
+                      return true;
+                    }
 
-                  //   if (current is CategoriesState) {
-                  //     return true;
-                  //   }
+                    if (current is CategoriesState) {
+                      return true;
+                    }
 
-                  //   return false;
-                  // },
+                    return false;
+                  },
                   builder: (context, state) {
+                    if (state is CategoryInitial){
+                      return Center(child: CircularProgressIndicator(),);
+                    }
+
                     if (state is CategoriesState) {
                       return Expanded(
                         child: GridView.builder(
