@@ -10,3 +10,9 @@ final class CategoriesState extends CategoryState {
 
   CategoriesState({required this.categories});
 }
+
+final class PrayersTimeState extends CategoryState {
+  final PrayerTime prayersTime;
+
+  PrayersTimeState({required this.prayersTime});
+}
