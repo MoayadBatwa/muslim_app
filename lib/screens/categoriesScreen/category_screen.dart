@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:muslim_app/screens/categoriesScreen/bloc/category_bloc.dart';
+import 'package:muslim_app/widgets/prayer_times_widget.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -26,111 +27,52 @@ class CategoryScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     scrollDirection: .horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                    child: BlocBuilder<CategoryBloc, CategoryState>(
+                      builder: (context, state) {
+                        if (state is PrayersTimeState) {
+                          return Row(
+                            children: [
+                              PrayerTimesWidget(
+                                prayerName: 'Fajr',
+                                prayerTime: state.prayersTime.fajr.toString(),
+                              ),
 
-                        SizedBox(width: 10),
+                              SizedBox(width: 10),
 
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                              PrayerTimesWidget(
+                                prayerName: 'Dhuhr',
+                                prayerTime: state.prayersTime.dhuhr.toString(),
+                              ),
 
-                        SizedBox(width: 10),
+                              SizedBox(width: 10),
 
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                              PrayerTimesWidget(
+                                prayerName: 'Asr',
+                                prayerTime: state.prayersTime.asr.toString(),
+                              ),
 
-                        SizedBox(width: 10),
+                              SizedBox(width: 10),
 
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                              PrayerTimesWidget(
+                                prayerName: 'Maghrib',
+                                prayerTime: state.prayersTime.maghrib.toString(),
+                              ),
 
-                        SizedBox(width: 10),
+                              SizedBox(width: 10),
 
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                              PrayerTimesWidget(
+                                prayerName: 'Isha',
+                                prayerTime: state.prayersTime.isha.toString(),
+                              ),
 
-                        SizedBox(width: 10),
+                              SizedBox(width: 10),
 
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .spaceAround,
-                              children: [Text("Fajr"), Text("Prayer Time")],
-                            ),
-                          ),
-                        ),
+                            ],
+                          );
+                        }
 
-                        SizedBox(width: 10),
-                        
-                      ],
+                        return SizedBox.shrink();
+                      },
                     ),
                   ),
 

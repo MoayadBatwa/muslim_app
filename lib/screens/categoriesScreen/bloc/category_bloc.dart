@@ -29,7 +29,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
       log("prayers:   $prayersTime");
       log("prayers:   ${prayersTime.runtimeType}");
-      // emit(PrayersTimeState(prayersTime: prayersTime!));
+      emit(PrayersTimeState(prayersTime: prayersTime!));
     });
   }
 }
