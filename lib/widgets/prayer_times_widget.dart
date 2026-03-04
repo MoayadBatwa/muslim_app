@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PrayerTimesWidget extends StatelessWidget {
-  const PrayerTimesWidget({super.key, required this.prayerName, required this.prayerTime});
+  const PrayerTimesWidget({
+    super.key,
+    required this.prayerName,
+    required this.prayerTime,
+  });
   final String prayerName;
-  final String prayerTime; 
+  final String prayerTime;
 
   @override
   Widget build(BuildContext context) {

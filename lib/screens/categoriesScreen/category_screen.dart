@@ -12,6 +12,7 @@ class CategoryScreen extends StatelessWidget {
       create: (_) => CategoryBloc(),
       child: Builder(
         builder: (context) {
+          context.read<CategoryBloc>().add(GetCategoriesEvent());
           context.read<CategoryBloc>().add(GetPrayersTimeEvent());
 
           return Scaffold(
@@ -28,7 +29,24 @@ class CategoryScreen extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: .horizontal,
                     child: BlocBuilder<CategoryBloc, CategoryState>(
+                      buildWhen: (previous, current) {
+                        if (current is CategoryInitial) {
+                          return true;
+                        }
+
+                        if (current is PrayersTimeState) {
+                          return true;
+                        }
+
+                        return false;
+                      },
+
                       builder: (context, state) {
+
+                        if (state is CategoryInitial) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
                         if (state is PrayersTimeState) {
                           return Row(
                             children: [
@@ -55,7 +73,8 @@ class CategoryScreen extends StatelessWidget {
 
                               PrayerTimesWidget(
                                 prayerName: 'Maghrib',
-                                prayerTime: state.prayersTime.maghrib.toString(),
+                                prayerTime: state.prayersTime.maghrib
+                                    .toString(),
                               ),
 
                               SizedBox(width: 10),
@@ -64,9 +83,6 @@ class CategoryScreen extends StatelessWidget {
                                 prayerName: 'Isha',
                                 prayerTime: state.prayersTime.isha.toString(),
                               ),
-
-                              SizedBox(width: 10),
-
                             ],
                           );
                         }
@@ -75,6 +91,8 @@ class CategoryScreen extends StatelessWidget {
                       },
                     ),
                   ),
+
+                  SizedBox(height: 15),
 
                   BlocBuilder<CategoryBloc, CategoryState>(
                     buildWhen: (previous, current) {
