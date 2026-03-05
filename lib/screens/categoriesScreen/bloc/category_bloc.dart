@@ -17,13 +17,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       final List<AzkarCategory> categories;
       try {
         categories = await muslimRepo.getAzkarCategories();
-        throw Error();
       } catch (e) {
         emit(ErrorCategoriesState());
         return;
       }
 
-      // emit(CategoriesState(categories: categories));
+      emit(CategoriesState(categories: categories));
     });
 
     on<GetPrayersTimeEvent>((event, emit) async {

@@ -46,7 +46,6 @@ class CategoryScreen extends StatelessWidget {
                       },
 
                       builder: (context, state) {
-
                         if (state is CategoryInitial) {
                           return Center(child: CircularProgressIndicator());
                         }
