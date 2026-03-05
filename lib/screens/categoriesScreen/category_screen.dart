@@ -38,6 +38,10 @@ class CategoryScreen extends StatelessWidget {
                           return true;
                         }
 
+                        if (current is ErrorPrayersTimeState) {
+                          return true;
+                        }
+
                         return false;
                       },
 
@@ -101,6 +105,10 @@ class CategoryScreen extends StatelessWidget {
                       }
 
                       if (current is CategoriesState) {
+                        return true;
+                      }
+
+                      if (current is ErrorCategoriesState) {
                         return true;
                       }
 

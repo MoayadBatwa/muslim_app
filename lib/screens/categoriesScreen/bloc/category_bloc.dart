@@ -14,21 +14,36 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
   CategoryBloc() : super(CategoryInitial()) {
     on<GetCategoriesEvent>((event, emit) async {
-      final categories = await muslimRepo.getAzkarCategories();
+      final List<AzkarCategory> categories;
+      try {
+        categories = await muslimRepo.getAzkarCategories();
+        throw Error();
+      } catch (e) {
+        emit(ErrorCategoriesState());
+        return;
+      }
 
-      emit(CategoriesState(categories: categories));
+      // emit(CategoriesState(categories: categories));
     });
 
     on<GetPrayersTimeEvent>((event, emit) async {
-      final location = await muslimRepo.searchLocations(locationName: "makkah");
-      final prayersTime = await muslimRepo.getPrayerTimes(
-        location: location[0],
-        date: DateTime.now(),
-        attribute: PrayerAttribute(),
-      );
+      final PrayerTime? prayersTime;
 
-      log("prayers:   $prayersTime");
-      log("prayers:   ${prayersTime.runtimeType}");
+      try {
+        final location = await muslimRepo.searchLocations(
+          locationName: "makkah",
+        );
+
+        prayersTime = await muslimRepo.getPrayerTimes(
+          location: location[0],
+          date: DateTime.now(),
+          attribute: PrayerAttribute(),
+        );
+      } catch (e) {
+        emit(ErrorPrayersTimeState());
+        return;
+      }
+
       emit(PrayersTimeState(prayersTime: prayersTime!));
     });
   }

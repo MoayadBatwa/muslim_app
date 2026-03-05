@@ -16,3 +16,7 @@ final class PrayersTimeState extends CategoryState {
 
   PrayersTimeState({required this.prayersTime});
 }
+
+final class ErrorCategoriesState extends CategoryState{}
+
+final class ErrorPrayersTimeState extends CategoryState{}
